@@ -4,7 +4,7 @@ const stream = require('stream');
 const util = require('util');
 const querystring = require('querystring');
 
-module.exports.watch = function watch(config, path, queryParams, callback, done) {
+module.exports.watch = function watch(config, path, queryParams, callback, done, signal) {
     const url = config.getCurrentCluster().server + path;
     queryParams.watch = true;
 
@@ -45,6 +45,7 @@ module.exports.watch = function watch(config, path, queryParams, callback, done)
     const fetchOptions = {
         method: 'GET',
         headers: requestOptions.headers,
+        signal: signal
     };
 
     fetch(url + '?' + querystring.stringify(queryParams), fetchOptions)
