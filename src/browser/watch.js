@@ -4,12 +4,12 @@ const stream = require('stream');
 const util = require('util');
 const querystring = require('querystring');
 
-module.exports.watch = function watch(config, path, queryParams, callback, done, signal) {
+module.exports.watch = function watch(config, path, queryParams, callback, done, signal, headers) {
     const url = config.getCurrentCluster().server + path;
     queryParams.watch = true;
 
     const requestOptions = {
-        headers: {},
+        headers,
     };
 
     config.applyToRequest(requestOptions);
