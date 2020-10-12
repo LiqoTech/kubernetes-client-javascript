@@ -9,7 +9,7 @@ module.exports.watch = function watch(config, path, queryParams, callback, done,
     queryParams.watch = true;
 
     const requestOptions = {
-        headers,
+        headers: headers || {},
     };
 
     config.applyToRequest(requestOptions);
