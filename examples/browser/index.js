@@ -12,7 +12,8 @@ const userManager = new UserManager({
 });
 
 if (window.location.pathname === '/callback') {
-    userManager.signinRedirectCallback()
+    userManager
+        .signinRedirectCallback()
         .then(function(user) {
             window.location = '/';
         })
@@ -29,19 +30,22 @@ if (window.location.pathname === '/callback') {
         document.body.append(link);
     });
 } else {
-    userManager.getUser()
-        .then(function(user) {
-            if (!user) {
-                const loginButton = document.createElement('button');
-                loginButton.innerText = 'Login';
-                loginButton.addEventListener('click', function() {
+    userManager.getUser().then(function(user) {
+        if (!user) {
+            const loginButton = document.createElement('button');
+            loginButton.innerText = 'Login';
+            loginButton.addEventListener(
+                'click',
+                function() {
                     userManager.signinRedirect();
-                }, false);
-                document.body.append(loginButton);
-            } else {
-                render(user);
-            }
-        });
+                },
+                false,
+            );
+            document.body.append(loginButton);
+        } else {
+            render(user);
+        }
+    });
 }
 
 function render(user) {
@@ -51,30 +55,37 @@ function render(user) {
 
     const logoutButton = document.createElement('button');
     logoutButton.innerText = 'Logout';
-    logoutButton.addEventListener('click', function() {
-        userManager.signoutRedirect()
-            .catch(function(error) {
+    logoutButton.addEventListener(
+        'click',
+        function() {
+            userManager.signoutRedirect().catch(function(error) {
                 if (error.message === 'no end session endpoint') {
                     window.location = '/logout';
                 }
                 throw error;
             });
-        }, false);
+        },
+        false,
+    );
     document.body.append(logoutButton);
 
     const config = new Config(APISERVER_URL, user.id_token, user.token_type);
     const coreV1 = config.makeApiClient(Core_v1Api);
 
-    watch(config, '/api/v1/watch/events', {},
+    watch(
+        config,
+        '/api/v1/watch/events',
+        {},
         function(type, object) {
             console.log('New event', type, object);
         },
         function(e) {
             console.log('Stream ended', e);
-        }
+        },
     );
 
-    coreV1.listNode()
+    coreV1
+        .listNode()
         .then(function(nodesResponse) {
             const header = document.createElement('h2');
             header.innerText = 'Cluster Nodes';
@@ -82,7 +93,7 @@ function render(user) {
 
             const nodes = nodesResponse.body.items;
             const ul = document.createElement('ul');
-            for(const idx in nodes) {
+            for (const idx in nodes) {
                 const li = document.createElement('li');
                 li.innerText = nodes[idx].metadata.name;
                 ul.append(li);

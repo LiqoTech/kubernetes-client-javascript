@@ -9,7 +9,6 @@ module.exports.Config = (function() {
         },
     };
 
-
     function Config(apiServer, token, tokenType) {
         if (!apiServer) {
             throw new Error('No API server address specified');

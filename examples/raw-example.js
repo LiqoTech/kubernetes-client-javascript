@@ -7,7 +7,9 @@ kc.loadFromDefault();
 const opts = {};
 kc.applyToRequest(opts);
 
-request.get(`${kc.getCurrentCluster().server}/api/v1/namespaces/default/pods`, opts,
+request.get(
+    `${kc.getCurrentCluster().server}/api/v1/namespaces/default/pods`,
+    opts,
     (error, response, body) => {
         if (error) {
             console.log(`error: ${error}`);
@@ -16,5 +18,5 @@ request.get(`${kc.getCurrentCluster().server}/api/v1/namespaces/default/pods`, o
             console.log(`statusCode: ${response.statusCode}`);
         }
         console.log(`body: ${body}`);
-  });
-
+    },
+);

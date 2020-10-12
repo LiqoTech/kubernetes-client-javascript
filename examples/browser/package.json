@@ -1,16 +1,16 @@
 {
-  "private": true,
-  "scripts": {
-    "start": "webpack-dev-server"
-  },
-  "devDependencies": {
-    "html-webpack-plugin": "^3.2.0",
-    "webpack": "^4.29.5",
-    "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.2.0"
-  },
-  "dependencies": {
-    "@kubernetes/client-node": "file:../..",
-    "oidc-client": "^1.6.1"
-  }
+    "private": true,
+    "scripts": {
+        "start": "webpack-dev-server"
+    },
+    "devDependencies": {
+        "html-webpack-plugin": "^3.2.0",
+        "webpack": "^4.29.5",
+        "webpack-cli": "^3.2.3",
+        "webpack-dev-server": "^3.2.0"
+    },
+    "dependencies": {
+        "@kubernetes/client-node": "file:../..",
+        "oidc-client": "^1.6.1"
+    }
 }

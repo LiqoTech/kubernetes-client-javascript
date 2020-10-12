@@ -8,7 +8,7 @@ const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
 const path = '/api/v1/namespaces/default/pods';
 const watch = new k8s.Watch(kc);
 
-const listFn = () => k8sApi.listPodForAllNamespaces()
+const listFn = () => k8sApi.listPodForAllNamespaces();
 
 const cache = new k8s.ListWatch(path, watch, listFn);
 
@@ -22,6 +22,6 @@ const looper = () => {
         console.log(names.join(','));
     }
     setTimeout(looper, 2000);
-}
+};
 
 looper();
