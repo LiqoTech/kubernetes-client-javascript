@@ -21,7 +21,7 @@
         "format": "prettier --loglevel error --write './src/**/*.ts'",
         "lint": "tslint --project \".\" && prettier --check './src/**/*.ts' && tslint --project \"./examples/typescript\"",
         "clean": "rm -Rf node_modules/ dist/",
-        "build": "tsc && mkdir -p dist/browser && cp src/browser/request-fetch.js src/browser/config.js src/browser/watch.js dist/browser/",
+        "build": "mkdir -p dist/browser && cp src/browser/request-fetch.js src/browser/config.js src/browser/watch.js dist/browser/",
         "generate": "./generate-client.sh",
         "watch": "tsc --watch",
         "test": "nyc mocha",
